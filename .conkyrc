@@ -1,0 +1,83 @@
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+
+# Update interval in seconds
+update_interval 1.0
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
+short_units yes
+
+# How strict should if_up be when testing an interface for being up?
+# The value is one of up, link or address, to check for the interface
+# being solely up, being up and having link or being up, having link
+# and an assigned IP address. 
+if_up_strictness address
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+# use_spacer should have an argument of left, right, or none
+use_spacer left
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale no
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 4
+
+# ----- COMMENTS -----
+# "#4dc3fff"
+# ------- END --------
+
+# Stuff after 'TEXT' will be formatted on screen
+TEXT
+
+# JSON for i3bar
+
+[{ "full_text" : " ${fs_free /home}/${fs_size /home}" , "color" : 
+	${if_match ${fs_free_perc} < 90}"\#00ff00"
+	${else}"\ff0000"
+	${endif} },
+ { "full_text" : "entropy: ${entropy_avail}/${entropy_poolsize} - ${entropy_perc}%" , "color" : 
+	${if_match ${entropy_avail} > 3000}"\#00ff00"
+	${else}"\#ff0000"
+	${endif} },
+ { "full_text" : "CPU1: ${top cpu 1}%" , "color" : 
+	${if_match ${top cpu 1} < 90}"\#00ff00"
+	${else}"\#ff0000"
+	${endif} },
+ { "full_text" : "CPU2: ${top cpu 2}%" , "color" :
+	${if_match ${top cpu 2} < 90}"\#00ff00"                                                                   
+    ${else}"\#ff0000"                                                                                         
+    ${endif} },
+ { "full_text" : "CPU3: ${top cpu 3}%" , "color" : 
+	${if_match ${top cpu 3} < 90}"\#00ff00"                                                                   
+    ${else}"\#ff0000"                                                                                         
+    ${endif} },
+ { "full_text" : "CPU4: ${top cpu 4}%" , "color" :
+	${if_match ${top cpu 4} < 90}"\#00ff00"                                                                   
+    ${else}"\#ff0000"                                                                                         
+    ${endif} },
+ { "full_text" : " ${memperc}%" , "color" :                                                                  
+	${if_match ${memperc} < 90}"\#00ff00"
+	${else}"\#ff0000"
+	${endif} },
+ { "full_text" : "local: $addr" , "color" : 
+	${if_match "${addr}" == "192.168.1.218"}"\#ff0000"
+	${else}"\#00ff00"
+	${endif} },
+ { "full_text" : " ${exec curl -s https://api.ipify.org/} - ${exec curl -s ipinfo.io/country}" , "color" :
+	${if_match "${exec curl -s https://api.ipify.org/}" == "IPADDRESS"}"\#ff0000"
+	${else}"\#00ff00"
+	${endif} },
+ { "full_text" : "${time  %d.%m.%Y  %H:%M:%S} " , "color" : 
+	${if_match ${time %H} < 22 } "\#4dc3fff"
+	${else}"\#ff0000"
+	${endif} } 
+],
